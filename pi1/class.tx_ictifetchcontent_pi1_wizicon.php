@@ -39,6 +39,9 @@
  */
 class tx_ictifetchcontent_pi1_wizicon {
 
+
+					protected $locallangPath = 'LLL:EXT:icti_fetch_content/locallang.xml:';
+
 					/**
 					 * Processing the wizard items array
 					 *
@@ -46,37 +49,16 @@ class tx_ictifetchcontent_pi1_wizicon {
 					 * @return	Modified array with wizard items
 					 */
 					function proc($wizardItems)	{
-						global $LANG;
-
-						$LL = $this->includeLocalLang();
 
 						$wizardItems['plugins_tx_ictifetchcontent_pi1'] = array(
 							'icon'=>t3lib_extMgm::extRelPath('icti_fetch_content').'pi1/ce_wiz.gif',
-							'title'=>$LANG->getLLL('pi1_title',$LL),
-							'description'=>$LANG->getLLL('pi1_plus_wiz_description',$LL),
+							'title' => $GLOBALS['LANG']->sL($this->locallangPath . 'pi1_title', TRUE),
+							'description' => $GLOBALS['LANG']->sL($this->locallangPath . 'pi1_plus_wiz_description', TRUE),
 							'params'=>'&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=icti_fetch_content_pi1'
 						);
 
 						return $wizardItems;
 					}
-
-					/**
-					 * Reads the [extDir]/locallang.xml and returns the $LOCAL_LANG array found in that file.
-					 *
-					 * @return	The array with language labels
-					 */
-					function includeLocalLang()	{
-						$llFile = t3lib_extMgm::extPath('icti_fetch_content').'locallang.xml';
-						$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
-
-						return $LOCAL_LANG;
-					}
 				}
-
-
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/icti_fetch_content/pi1/class.tx_ictifetchcontent_pi1_wizicon.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/icti_fetch_content/pi1/class.tx_ictifetchcontent_pi1_wizicon.php']);
-}
 
 ?>
